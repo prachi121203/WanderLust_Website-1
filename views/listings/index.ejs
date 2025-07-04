@@ -6,7 +6,7 @@
    #filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 2.5rem; /* spacing between each category item */
+  gap: 1.5rem; /* spacing between each category item */
   padding: 1rem 0;
   align-items: center;
 }
@@ -38,17 +38,22 @@
   text-align: center;
 }
 
-   .category-filter-form {
+  .category-filter-form {
   display: flex;
+  align-items: center;   
   justify-content: flex-end; /* Push to right */
-  margin: 1rem 2rem ;
+  margin: 2rem 2rem ;
+  gap: 2rem;
 }
 
 .category-filter-form .form-select {
+  align-items: center; 
+  display: flex;
   width: 160px;
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 0 1.5rem 0 1rem;
+  height: 3.25rem; 
+  border: 2px solid black;
+  border-radius: 1rem;
   font-size: 1rem;
   transition: border-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
@@ -70,13 +75,19 @@
     border-radius: 1rem;
     height: 3.25rem;
     padding: 1rem;
-    margin-left: 3rem;
+    margin-left: 0.5rem;
     display: flex;
     align-items: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
+  .tax-toggle:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
 </style>
 <div class="d-flex justify-content-between align-items-center flex-wrap px-3 mt-3">
-<div id="filters"  class="d-flex flex-wrap overflow-auto px-2 gap-3 mt-3">
+<div id="filters"  class="d-flex flex-wrap overflow-auto gap-3 mt-3">
      <a href="/listings?category=Trending" class="text-center text-decoration-none text-dark flex-shrink-0">
     <div><i class="fa-solid fa-fire fa-lg"></i></div>
     <p>Trending</p>
@@ -121,7 +132,7 @@
   </div>
   </div>
   <form class="category-filter-form" action="/listings" method="GET">
-  <select name="category" class="form-select" onchange="this.form.submit()">
+  <select name="category" class="form-select"  style="width: auto;" onchange="this.form.submit()">
     <option value="">All Categories</option>
     <option value="Trending">Trending</option>
     <option value="Rooms">Rooms</option>

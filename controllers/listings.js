@@ -7,17 +7,26 @@ const { listingSchema } = require("../schema.js");
     //};
 
     module.exports.index = async (req, res) => {
-  const { category } = req.query;
-  let allListings;
+  const { category, q } = req.query;
+ let filter = {};
 
-  if (category) {
-    allListings = await Listing.find({ category });
-  } else {
-    allListings = await Listing.find({});
+  // Build filter dynamically
+  if (category && category !== "") {
+    filter.category = category;
   }
 
-  // ✅ Pass both listings and selected category to EJS
-  res.render("listings/index.ejs", { allListings, category });
+  if (q && q.trim() !== "") {
+    const regex = new RegExp(q, 'i'); // case-insensitive
+    filter.$or = [
+      { title: regex },
+      { location: regex },
+      { description: regex }
+    ];
+  }
+
+  const allListings = await Listing.find(filter);
+
+  res.render("listings/index.ejs", { allListings, category, q });
 };
 
     module.exports.renderNewForm = (req, res) => {
